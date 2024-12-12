@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework import routers
 from . import views
-from .views import OrderCreateView, SMImagesList, PackingImagesList, LogoImagesList, FlyerImagesList, DairyImagesList, InvitationImagesList, ClientRegistrationView, ProfileView, ClientSignInView, UpdateProfileView
+from .views import ViewOrdersAPIView, TransactionAPIView, CreateOrderAPIView, SMImagesList, PackingImagesList, LogoImagesList, FlyerImagesList, DairyImagesList, InvitationImagesList, ClientRegistrationView, ProfileView, ClientSignInView
 
 
 router = routers.DefaultRouter()
@@ -14,12 +14,13 @@ router.register(r'revo/invitation', InvitationImagesList)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('update_profile/', UpdateProfileView.as_view(), name='update-profile'),
-    path('profile/', ProfileView.as_view(), name='user-profile'),
-    path('register/', ClientRegistrationView.as_view(), name='user-register'),
-    path('sign_in/', ClientSignInView.as_view(), name='user-signIn'),
-    path('order_create/', OrderCreateView.as_view(), name='create-order'),
-    path('payment/initiate/', views.initiate_payment, name='initiate_payment'),
-    path('payment/response/', views.payment_response, name='payment_response'),
-    path('get-csrf-token//', views.get_csrf_token, name='get_csrf_token'),
+    path('profile/', ProfileView.as_view(), name='user-profile'),#Not Working
+    path('register/', ClientRegistrationView.as_view(), name='user-register'),#Not Working
+    path('sign_in/', ClientSignInView.as_view(), name='user-signIn'),#Working
+    #path('order_create/', OrderCreateView.as_view(), name='create-order'),#Working
+    path('order/create/', CreateOrderAPIView.as_view(), name='create-order-api'),#Working
+    path('order/complete/', TransactionAPIView.as_view(), name='create-complete-api'),#Working
+    path('order/show/', ViewOrdersAPIView.as_view(), name='show-complete-api'),#Working
+
+   
 ]

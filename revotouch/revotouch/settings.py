@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 from os import getenv
 from dotenv import load_dotenv
@@ -57,6 +58,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -64,10 +66,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-MIDDLEWARE.insert(0, 'corsheaders.middleware.CorsMiddleware')
+
+
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:19006',  # Replace with your React Native app's URL
+    "http://localhost:8081"
 ]
 
 ROOT_URLCONF = 'revotouch.urls'
@@ -150,21 +153,21 @@ STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
 
 # Paytm Configuration
-PAYTM_MERCHANT_ID = 'oBCEWK70663331405894'  # From Paytm Dashboard
-PAYTM_MERCHANT_KEY = 'YOUR_MERCHANT_KEY'  # From Paytm Dashboard
-PAYTM_WEBSITE = 'WEBSTAGING'  # For testing, use WEBSTAGING. For production, use DEFAULT
-PAYTM_INDUSTRY_TYPE_ID = 'Retail'
-PAYTM_CHANNEL_ID = 'WEB'
-PAYTM_PAYMENT_GATEWAY_URL = 'https://securegw-stage.paytm.in/theia/processTransaction'  # Testing URL
-PAYTM_TRANSACTION_STATUS_URL = 'https://securegw-stage.paytm.in/merchant-status/getTxnStatus'
+# PAYTM_MERCHANT_ID = 'oBCEWK70663331405894'  # From Paytm Dashboard
+# PAYTM_MERCHANT_KEY = 'YOUR_MERCHANT_KEY'  # From Paytm Dashboard
+# PAYTM_WEBSITE = 'WEBSTAGING'  # For testing, use WEBSTAGING. For production, use DEFAULT
+# PAYTM_INDUSTRY_TYPE_ID = 'Retail'
+# PAYTM_CHANNEL_ID = 'WEB'
+# PAYTM_PAYMENT_GATEWAY_URL = 'https://securegw-stage.paytm.in/theia/processTransaction'  # Testing URL
+# PAYTM_TRANSACTION_STATUS_URL = 'https://securegw-stage.paytm.in/merchant-status/getTxnStatus'
 
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:19006']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+RAZORPAY_KEY_ID = getenv("RAZORPAY_KEY_ID")
+RAZORPAY_KEY_SECRET = getenv("RAZORPAY_KEY_SECRET")
