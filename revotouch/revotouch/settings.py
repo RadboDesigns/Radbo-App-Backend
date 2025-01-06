@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 from os import getenv
 from dotenv import load_dotenv
+import razorpay
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +30,7 @@ SECRET_KEY = 'django-insecure-ip7@-zfz53jj2%9g0rqxadhl8du2%ptmrgo-qbsbouyp923_#k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.2', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.1.4', 'localhost', '127.0.0.1']
 
 
 REST_FRAMEWORK = {
